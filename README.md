@@ -1,8 +1,7 @@
 ## Cafe Monitoring Automation
 Bunch of python script written to monitor Google Sheet data entered in cafe. <br>
 monitors below:
-1. Transaction Reconciliation For the day: Meaning:<br>
-Cash Transaction + SwiggyZomato + CardPayment - Expense = TotalTransaction
+
 
 
 ##Command
@@ -15,3 +14,8 @@ Command:
 ```
 ### Assumption Made:
 1. This Report Will run every day Singapore morning around 8AM (This time I will be home, so the Whatsapp connection can work if required)
+
+### Reconciliations and Checks:
+1. If the Data for previous Business Day has been entered. (This will be 99.99% done, but still need to be done)
+2. Transaction Reconciliation For the Previous Business day: <br>
+    ___Cash Transaction + SwiggyZomato + CardPayment - Expense = TotalTransaction___
