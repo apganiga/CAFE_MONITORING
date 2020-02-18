@@ -13,3 +13,5 @@ Command:
 	python ExtractData.py DAILY_REPORT  A1:O500 
 	python CafeMonitor.py DAILY_REPORT A1:O500 < main Wrapper
 ```
+### Assumption Made:
+1. This Report Will run every day Singapore morning around 8AM (This time I will be home, so the Whatsapp connection can work if required)
