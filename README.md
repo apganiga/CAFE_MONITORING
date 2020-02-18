@@ -1,8 +1,9 @@
 ## Cafe Monitoring Automation
-Bunch of python script written to monitor Google Sheet data entered in cafe. 
+Bunch of python script written to monitor Google Sheet data entered in cafe. <br>
 monitors below:
-1. Transaction Reconciliation For the day: Meaning:
+1. Transaction Reconciliation For the day: Meaning:<br>
 Cash Transaction + SwiggyZomato + CardPayment - Expense = TotalTransaction
+
 
 ##Command
 cd G:\CAFE_MONITOR
