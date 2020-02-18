@@ -8,6 +8,8 @@ Cash Transaction + SwiggyZomato + CardPayment - Expense = TotalTransaction
 ##Command
 cd G:\CAFE_MONITOR
 
-Command: 
+Command:
+``` 
 	python ExtractData.py DAILY_REPORT  A1:O500 
 	python CafeMonitor.py DAILY_REPORT A1:O500 < main Wrapper
+```
