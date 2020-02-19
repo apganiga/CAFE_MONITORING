@@ -52,7 +52,7 @@ class ExtractData:
         self.headers= self.values[0]
         self.headers = [ str(col).replace("\n",' ').title().replace(' ', "") for col in self.headers ]
         self.headers = [ re.sub(r'\W', '',header) for header in self.headers]
-        print(self.headers, "<<<<<")
+        #print(self.headers, "<<<<<")
         self.values = self.values[1:]
         #print("====>", self.datatype[self.SHEET_NAME])
         new_values = list()

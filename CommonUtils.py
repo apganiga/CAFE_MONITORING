@@ -13,6 +13,6 @@ def __getDate(dayMinus) :
     return prevBD
 #################################################
 
-def __logging(msg, mode='text') :
+def logging(msg, mode='text') :
     if mode == 'text':
         print(msg)
