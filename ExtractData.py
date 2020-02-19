@@ -54,7 +54,7 @@ class ExtractData:
         self.headers = [ re.sub(r'\W', '',header) for header in self.headers]
         print(self.headers, "<<<<<")
         self.values = self.values[1:]
-        print("====>", self.datatype[self.SHEET_NAME])
+        #print("====>", self.datatype[self.SHEET_NAME])
         new_values = list()
         # We only take last 30 days data. This number is orbiatary. If requierd can be made more or less
         data_dict = OrderedDict()

@@ -9,7 +9,7 @@ if __name__ == '__main__' :
     args = parser.parse_args()
     ed = ExtractData(args.SheetName, args.Range)
     Last30Days = ed.downloadData()
-    prevBD = CommonUtils.__getDate(-3)
+    prevBD = CommonUtils.__getDate(-1)
     print(prevBD)
     try:
         prevDayDict = Last30Days[prevBD]
