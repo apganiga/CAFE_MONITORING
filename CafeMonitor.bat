@@ -1,0 +1,1 @@
+python CafeMonitor.py DAILY_REPORT A1:O500

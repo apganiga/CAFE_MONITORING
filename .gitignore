@@ -1,4 +1,5 @@
 'token.pickle' 
 token_backup/
 Test* 
-credentials.json  
+credentials.json
+DAILY_REPORT/

@@ -2,6 +2,7 @@ import argparse
 from ExtractData import ExtractData
 import CommonUtils
 from TransactionReconcile import Transaction
+import TwillioMessaging as tm
 
 if __name__ == '__main__' :
     parser = argparse.ArgumentParser()
@@ -14,14 +15,14 @@ if __name__ == '__main__' :
     # print(Last30Days)
     # exit()
 
-    prevBD = CommonUtils.__getDate(-1)
+    prevBD = CommonUtils.getDate(-1)
     yesterdayTransaction = Transaction(prevBD, Last30Days[prevBD])
     yesterdayTransaction.isThereDifference()
 
     cashNotDepositedToBank = 0
     for dayBefore in range(1,30) :
         dayBefore *= -1
-        forBusinessDay = CommonUtils.__getDate(dayBefore)
+        forBusinessDay = CommonUtils.getDate(dayBefore)
         eachDayTran = Transaction(forBusinessDay, Last30Days[forBusinessDay])
         cashNotDepositedToBank += eachDayTran.CashAtTheEnd
         if eachDayTran.bankDepositDoneOnThisDay() :
@@ -29,6 +30,10 @@ if __name__ == '__main__' :
 
     if cashNotDepositedToBank > 0 :
         CommonUtils.logging("Cash to be deposited to bank as of {} is Rs.{}.00".format(prevBD, int(cashNotDepositedToBank)))
+    else:
+        CommonUtils.logging("Cash deposit to bank as of {} is upto date".format(prevBD))
+
+    tm.SendWhatsUpReport()
 
 
 

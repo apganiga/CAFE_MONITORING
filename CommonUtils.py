@@ -1,6 +1,7 @@
 import datetime
 
-def __getDate(dayMinus) :
+
+def getDate(dayMinus) :
     '''
     :param dayMinus: No. of day to be subtracted
     :returns String formatted dd/mm/yyyy:
@@ -14,5 +15,9 @@ def __getDate(dayMinus) :
 #################################################
 
 def logging(msg, mode='text') :
-    if mode == 'text':
-        print(msg)
+    today_date = getDate(0)
+    report_file = 'G:\CAFE_MONITOR\DAILY_REPORT\REPORT_' + today_date.replace('/','_') + '.dat'
+    with open(report_file, 'a') as fh:
+        if mode == 'text':
+            print(msg)
+            print(msg,file=fh)
