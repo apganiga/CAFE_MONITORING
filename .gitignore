@@ -4,3 +4,4 @@ Test*
 *.json
 *.yaml
 DAILY_REPORT/
+__Archive__/
