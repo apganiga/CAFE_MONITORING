@@ -36,7 +36,7 @@ class ExtractData:
             print("Token.Pickle is Found with Zero byte.. Copying the backup...")
             copy(self.secrets_backup_dir + '/token.pickle', self.secrets_dir + '/')
 
-        if os.path.exists(self.token_file) and os.path.getsize(self.secrets_dir +  '/token.pickle') > 0:
+        if os.path.exists(self.token_file) and os.path.getsize(self.token_file) > 0:
             print("Token.pickle found and is greater than Zero Byte")
             with open(self.token_file, 'rb') as token:
                 self.creds = pickle.load(token)
