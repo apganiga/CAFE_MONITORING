@@ -3,6 +3,15 @@ from ExtractData import ExtractData
 import CommonUtils
 from TransactionReconcile import Transaction
 import TwillioMessaging as tm
+import os
+import yaml
+
+def loadMaskedDataToEnvironment():
+    with open('G:\CAFE_MONITOR\drowssap\MaskedData.yml','r') as masked_data:
+        secrets = yaml.load(masked_data,Loader=yaml.FullLoader)
+    for secret in secrets.keys():
+        print("{} = {}".format(secret, secrets[secret]))
+        os.environ[secret] = secrets[secret]
 
 if __name__ == '__main__' :
     parser = argparse.ArgumentParser()
@@ -10,10 +19,10 @@ if __name__ == '__main__' :
     parser.add_argument('Range', type=str, help="What Range You want to Extract:")
     args = parser.parse_args()
 
+    loadMaskedDataToEnvironment()
+
     ed = ExtractData(args.SheetName, args.Range)
     Last30Days = ed.downloadData()
-    # print(Last30Days)
-    # exit()
 
     prevBD = CommonUtils.getDate(-1)
     yesterdayTransaction = Transaction(prevBD, Last30Days[prevBD])
@@ -34,12 +43,3 @@ if __name__ == '__main__' :
         CommonUtils.logging("Cash deposit to bank as of {} is upto date".format(prevBD))
 
     tm.SendWhatsUpReport()
-
-
-
-
-
-
-
-
-

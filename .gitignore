@@ -1,5 +1,6 @@
-'token.pickle' 
-token_backup/
+drowssap/
+secrets_backup/
 Test* 
-credentials.json
+*.json
+*.yaml
 DAILY_REPORT/

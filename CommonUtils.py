@@ -1,5 +1,5 @@
 import datetime
-
+import os
 
 def getDate(dayMinus) :
     '''
@@ -16,7 +16,7 @@ def getDate(dayMinus) :
 
 def logging(msg, mode='text') :
     today_date = getDate(0)
-    report_file = 'G:\CAFE_MONITOR\DAILY_REPORT\REPORT_' + today_date.replace('/','_') + '.dat'
+    report_file =  os.environ['md_report_dir'] + '/REPORT_' + today_date.replace('/','_') + '.dat'
     with open(report_file, 'a') as fh:
         if mode == 'text':
             print(msg)
