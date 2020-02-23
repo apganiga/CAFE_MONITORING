@@ -1,16 +1,17 @@
 import argparse
 from ExtractData import ExtractData
 import CommonUtils
-from TransactionReconcile import Transaction
+from Transaction import Transaction
 import TwillioMessaging as tm
 import os
+import Checks
 import yaml
 
 def loadMaskedDataToEnvironment():
     with open('G:\CAFE_MONITOR\drowssap\MaskedData.yml','r') as masked_data:
         secrets = yaml.load(masked_data,Loader=yaml.FullLoader)
     for secret in secrets.keys():
-        print("{} = {}".format(secret, secrets[secret]))
+        # print("{} = {}".format(secret, secrets[secret]))
         os.environ[secret] = secrets[secret]
 
 if __name__ == '__main__' :
@@ -24,22 +25,18 @@ if __name__ == '__main__' :
     ed = ExtractData(args.SheetName, args.Range)
     Last30Days = ed.downloadData()
 
-    prevBD = CommonUtils.getDate(-1)
-    yesterdayTransaction = Transaction(prevBD, Last30Days[prevBD])
-    yesterdayTransaction.isThereDifference()
+## Check1: Check if Data Entered is Valid
+    T1date = CommonUtils.getDate(-1)
+    t1Transaction = Transaction(T1date, Last30Days[T1date])
+    Checks.isThereDifference(T1date, t1Transaction)
 
-    cashNotDepositedToBank = 0
-    for dayBefore in range(1,30) :
-        dayBefore *= -1
-        forBusinessDay = CommonUtils.getDate(dayBefore)
-        eachDayTran = Transaction(forBusinessDay, Last30Days[forBusinessDay])
-        cashNotDepositedToBank += eachDayTran.CashAtTheEnd
-        if eachDayTran.bankDepositDoneOnThisDay() :
-            break
+## Check2: How much cash pending for deposit
+    Checks.howMuchCashNotDepositedToBank(Last30Days)
 
-    if cashNotDepositedToBank > 0 :
-        CommonUtils.logging("Cash to be deposited to bank as of {} is Rs.{}.00".format(prevBD, int(cashNotDepositedToBank)))
-    else:
-        CommonUtils.logging("Cash deposit to bank as of {} is upto date".format(prevBD))
+## Check3: Sealing Machine Count
+    T2date = CommonUtils.getDate(-2)
+    t2Transaction = Transaction(T2date, Last30Days[T2date])
+    Checks.sealingMachineCountMatch(t1Transaction, t2Transaction)
 
+### Send WhatsApp Message
     tm.SendWhatsUpReport()

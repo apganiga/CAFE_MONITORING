@@ -14,7 +14,6 @@ import yaml
 ##Example Call: python ExtractData.py DAILY_REPORT  A1:E40
 class ExtractData:
     def __init__(self, SHEET_NAME, RANGE_NAME):
-        print("HERER")
         self.SHEET_NAME = SHEET_NAME
         self.RANGE_NAME = RANGE_NAME
 
@@ -31,13 +30,12 @@ class ExtractData:
     # The file token.pickle stores the user's access and refresh tokens, and is created automatically when the authorization flow completes for the first  time.
 
     def downloadData(self):
-        print("Called DownloadDAta")
         if os.path.exists(self.token_file) and os.path.getsize(self.token_file) == 0:
             print("Token.Pickle is Found with Zero byte.. Copying the backup...")
             copy(self.secrets_backup_dir + '/token.pickle', self.secrets_dir + '/')
 
         if os.path.exists(self.token_file) and os.path.getsize(self.token_file) > 0:
-            print("Token.pickle found and is greater than Zero Byte")
+            # print("Token.pickle found and is greater than Zero Byte")
             with open(self.token_file, 'rb') as token:
                 self.creds = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
