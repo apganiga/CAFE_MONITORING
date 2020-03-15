@@ -36,10 +36,11 @@ def howMuchCashNotDepositedToBank(Last30Days):
 def sealingMachineCountMatch(t1transaction, t2transaction):
     # print(t1transaction)
     # print(t2transaction)
+    diff = 0
     try:
         totalSealings = t1transaction.SealingMcCount - t2transaction.SealingMcCount
         totalCupsSold = t1transaction.NoOfRegularCup + t1transaction.NoOfLargeCup
-        diff = totalCupsSold == totalSealings
+        diff = totalCupsSold - totalSealings
     except (KeyError,ArithmeticError, AttributeError) as er:
         print(er)
         print(t1transaction)
