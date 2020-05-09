@@ -24,3 +24,6 @@ def SendWhatsUpReport():
     )
 
     print(message.sid)
+
+if __name__ == '__main__' :
+    SendWhatsUpReport()
